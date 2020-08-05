@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS_practice</title>
+</head>
+<body>
+    <p>我的练习</p>
+    <p id="demo"></p>
+    <p id="demo1">现在时间是</p>
+    <p id="demo2"></p>
+    <a href="javascript:alert('欢迎来到我的页面');">点击<br></a>
+</body>
+<!--script 一旦引入外部标签就不能编写代码了，即使编写浏览器也会忽略
+要是想写，可以再写一个script标签-->
+<script>
+    var fruits = ['Banana','Orange','Apple','Mango'];
+    document.getElementById('demo').innerHTML = fruits.toString();
+    console.log(fruits.toString());
+    var x = fruits.pop(); //删除数组最后一个元素
+    console.log(x);
+    fruits.push('KiWi');
+    console.log(fruits.toString());
+    var date = new Date(2020,2,2,22,22);
+    document.getElementById('demo1').innerHTML = date;
+    //返回0到9之间的数
+    document.getElementById('demo2').innerHTML = Math.floor(Math.random() * 10);
+    //search() 方法使用表达式来搜索匹配，然后返回匹配的位置
+    var str = "Visit W3school! \'hhhh\'";
+    var n = str.search('W3school');
+    document.write(n);
+    console.log(str);
+    console.log('str');
+    /*
+     * Number.MAX_VALUE表示数字的最大值，如果number超过这个最大，
+     * 会返回Infinity,表示正无穷，-Infinity表示负无穷
+     * NaN 是一个特殊的数字，表示Not A Number
+     * 不用用js进行对精确度要求比较高的运算
+     */
+    console.log(Number.MAX_VALUE);
+    // 一个变量声明了没赋值，它的值就是undefined
+    var a = 123;
+    a = a.toString();//将a转换成字符串，不会影响到原变量，将转换的结果返回
+    var b = 456
+    b = String(b);//将b转换成字符串
+    var c = '789';
+    c = Number(c);//将c转换成number类型，转换的字符串若有非数字则为NaN，
+                 // 空格或者空字符转换为0，true转为1.false转为0，null转换成0，undefined转换为NaN
+    // paresInt()把字符串有效整数部分转换成number，paresFloat()字符串有效部分转换成浮点数
+
+    // var d = prompt('请输入你的成绩');//可以输入内容的弹出框
+    // alert(d);
+
+    /* 基本数据类型的值直接在栈内存中存储，值与值之间相互独立，
+     * 对象是保存在堆内存中的，每创建一个对象就会在堆中开辟一个新空间，
+     * 变量保存的是内存地址(对象的引用)，如果两个变量保存的是同一个对象引用，
+     * 当一个通过一个变量修改属性时，另外一个也会受到影响
+     * 当比较两个引用类型时，比较的是内存地址
+     */
+
+    function isOu(num) {
+        return num%2 == 0;
+    }
+    var e = isOu(4);
+    document.write(e);
+
+    (function (a,b) {
+        console.log('这是一个立即执行函数,往往只执行一次'+ a*b);
+    })(3,4);
+
+    var object = {
+        name:'Zhu',
+        age: 18,
+        gender:'man'
+    }
+    //枚举对象中的属性
+    for (var f in object){
+        console.log(f + ':' + object[f]);
+    }
+
+    //工厂法创建对象,对象类型都是object，无法区分多种类型
+    function createPerson(name,gender) {
+        var obj = new obj;
+        obj.name = name;
+        obj.gender = gender;
+        obj.sayName = function () {
+            console.log(this.name);
+        }
+        return obj;
+    }
+    var obj1 = createPerson("猪八戒","男");
+    console.log(obj1);
+
+</script>
+</html>

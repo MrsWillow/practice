@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body>
+    <ol id="list" type="A">
+        <li id="bj">北京</li>
+        <li id="sh">上海</li>
+        <li id="tj">天津</li>
+    </ol>
+    <button id="bt1">创建节点到list下</button>
+    <button id="bt2">创建节点在北京前</button>
+    <button id="bt3">按下替换节点</button>
+</body>
+<script>
+    var bt1 = document.getElementById("bt1");
+    var bt2 = document.getElementById("bt2");
+    var bt3 = document.getElementById("bt3");
+
+    bt1.onclick = function () {
+        var list = document.createElement("li");
+        var ListText = document.createTextNode("重庆");
+        list.appendChild(ListText);//新节点中加上文字
+        var city = document.getElementById("list");
+        city.appendChild(list);   //city列表中增加新节点
+        //city.innerHTML += <li>广州</li>   一般两种方法结合使用
+
+        // var Li = document.createElement("li");
+        // Li.innerHTML = '广州';
+        // city.appendChild(Li);
+    }
+
+    bt2.onclick = function () {
+        var List1 = document.createElement("li");
+        var List1Text = document.createTextNode("广州");
+        List1.appendChild(List1Text);
+        var city = document.getElementById("list");
+        var BJ = document.getElementById("bj");
+        city.insertBefore(List1,BJ);//city列表中，在BJ节点前插入List1节点
+    }
+
+    bt3.onclick = function () {
+        var List2 = document.createElement("li");
+        var List2Text = document.createTextNode("深圳");
+        List2.appendChild(List2Text);
+        var city = document.getElementById("list");
+        var SH = document.getElementById("sh");
+        city.replaceChild(List2,SH); //city列表中，把SH节点替换为List2节点
+    }
+
+    //删除子节点   eg  city.removeChild(List2);
+    //               List2.parentNode.removeChild(List2);
+</script>
+</html>

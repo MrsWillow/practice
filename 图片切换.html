@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>change</title>
+</head>
+<body>
+<div>
+    <p id="info" style="text-align: center;"></p>
+    <img src="img/1.jpg" style="width: 50%;margin-left: 25%;height: 300px">
+    <div style="margin:0 auto;text-align: center">
+        <button id="bt1">上一张</button>
+        <button id="bt2">下一张</button>
+    </div>
+
+</div>
+
+</body>
+<script>
+    var imgArr = ['img/1.jpg','img/2.jpg','img/4.jpg'];
+    var index = 0;
+    var bt1 = document.getElementById('bt1');
+    var bt2 = document.getElementById('bt2');
+    //getElementsByTagName方法返回的是一个数组
+    var img = document.getElementsByTagName('img')[0];
+    var info = document.getElementById('info');
+    info.innerHTML = '一共'+imgArr.length+'张图片,当前第'+(index+1)+'张';
+    bt1.onclick = function () {
+        index --;
+        if (index < 0){
+            index = imgArr.length - 1;
+        }
+        img.src = imgArr[index];
+        info.innerHTML = '一共'+imgArr.length+'张图片,当前第'+(index+1)+'张';
+    }
+    bt2.onclick = function () {
+        index ++;
+        if (index > imgArr.length -1){
+            index = 0;
+        }
+        img.src = imgArr[index];
+        info.innerHTML = '一共'+imgArr.length+'张图片,当前第'+(index+1)+'张';
+    }
+</script>
+</html>

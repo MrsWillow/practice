@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM操作CSS</title>
+</head>
+<body>
+    <div id="box1"></div><br>
+	<div id="box2">
+		<div id="box3"></div>
+	</div>
+    <button id="bt1">按下按钮修改盒子样式</button><br />
+	<button id="bt2">按下获取样式表样式</button><br />
+	<button id="bt3">按下获取其他样式</button>
+	
+	
+</body>
+<style>
+    #box1{
+        width: 200px;
+        height: 200px;
+        background-color: beige;
+		padding: 10px;
+		border: 10px solid darksalmon;
+    }
+	#box2{
+		width: 200px;
+		height: 200px;
+		background-color: blue;
+		overflow: auto;
+	}
+	#box3{
+		width: 300px;
+		height: 300px;
+		background-color: yellow;
+	}
+</style>
+<script>
+    var box = document.getElementById('box1');
+    var bt1 = document.getElementById('bt1');
+	var bt2 = document.getElementById('bt2');
+	var bt2 = document.getElementById('bt3');
+    bt1.onclick = function () {
+		/* 如果CSS的样式名含有-，比如background-color，
+		*  这种名称在JS中是不合法的,需要将其修改为驼峰命名
+		*  去掉-，-后的字母大写
+		*  设置的均为内联样式，而内联样式会有较高的优先级，
+		*  js修改之后会优先显示
+		*  如果样式中写了！importment，即使通过js也不能覆盖该样式
+		*  通过style读取和设置的都是内联样式，无法读取样式表中的样式
+		*/
+		
+		box.style.width = '150px';
+		box.style.backgroundColor = 'aquamarine';
+    }
+	
+	bt2.onclick = function(){
+		/*
+		 *  获取元素当前显示的样式
+		 *  元素.currentStyle.样式名
+		 * 	但是只有IE浏览器支持
+		 * 	其他浏览器使用getComputedStyle()获取当前样式
+		 * 
+		 * 	该方法会返回一个对象，该对象封装了当前元素对应的样式
+		 * 	可以通过 对象.样式名 来读取样式
+		 * 	如果读取的样式没有设置，不会读取默认值，而是当前真实值
+		 * 	该方法不支持IE8及以下浏览器
+		 * 
+		 * 	通过currentStyle和getComputedStyle()获得的样式都是只读的，不能修改
+		 */
+		console.log(getComputedStyle(box,null).width);
+	}
+	
+	
+	//写个函数适用所有浏览器
+	function getStyle(obj,name){
+		if(window.getComputedStyle){
+			return getComputedStyle(obj,null)[name];
+		}else{
+			return obj.currentStyle(name);
+		}
+	}
+	
+	bt3.onclick = function(){
+		/*
+		*	clientWidth和clientHeight可以获取元素的可见高度和宽度
+		* 	返回的都是数字，没有px，包括内容区和内边距
+		* 	都是只读，不能修改
+		* 	
+		* 	offsetWidth和offsetHeight获取整个元素的高度和宽度
+		* 	包括内容区，内边距和边框
+		*/
+	    console.log(box.clientHeight);
+		console.log(box.offsetHeight);
+		
+		/*
+		*	offersetParent,获取当前元素的定位父元素
+		* 	会获取到离当前定位元素最近的开启了定位的祖父元素
+		* 	如果所有的祖先元素都没有开启定位，则返回body
+		* */
+		console.log(box.offsetParent);
+		/*
+		*	offsetLeft  当前元素相对于其定位父元素的水平偏移量
+		* 	offsetTop   当前元素相对于其定位父元素的垂直偏移量
+		* 	scrollWidth  scrollHeight 获取整个滚动区域的宽度和高度
+		* 	scrollLeft  水平滚动条滚动的距离
+		* 	scrollTop   垂直滚动条滚动的距离
+		* */
+	}
+</script>
+</html>

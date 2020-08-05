@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件对象</title>
+	</head>
+	<body>
+		<div id="moveDiv">
+			<textarea></textarea>
+		</div>
+		<div id="showDiv"></div>
+		
+		<div id="box" style="width: 100px;
+					height: 100px;background-color: beige;
+					position: absolute;
+					">
+		<!--想设置box的位置， 需要开启box的绝对定位 -->
+		</div>
+	</body>
+	
+	<script>
+		var moveDiv = document.getElementById('moveDiv');
+		var showDiv = document.getElementById('showDiv');
+		var box = document.getElementById('box');
+		/*
+		*	onmousemove 鼠标在元素上移动被触发
+		* 	当事件的响应函数被触发时，浏览器每次都会将一个事件对象作为
+		* 	实参传递给响应函数，在事件对象中封装了当前事件相关的一切信息
+		* 	比如鼠标的坐标，键盘哪个按键被按下，鼠标滚轮滚动的方向
+		* */
+		
+		moveDiv.onmousemove = function(event){
+			/*
+			 * 需要在showDiv中显示鼠标坐标
+			 * clientX 在当前可见窗口 鼠标指针水平坐标  Y 垂直			 *
+			 * 
+			 * 在IE8及以下的浏览器中，浏览器不会传递事件对象，将事件对象作为
+			 * windows对象的属性保存的
+			 * 
+			 * 解决事件对象的兼容性问题，
+			 * event = event || windows.event;
+			*/
+		   
+		    var x = event.clientX;
+			var y = event.clientY;
+			showDiv.innerHTML = 'x =' + x + ',y = ' +  y;
+		}
+		
+		document.onmousemove = function(event){
+			
+			//获取鼠标坐标
+			var left = event.clientX;
+			var top = event.clientY;
+			
+			//设置div的偏移量，div的偏移量是相对于整个页面的
+			//pageX和pageY可以获取鼠标相对于当前页面的坐标
+			box.style.left = left + 'px';
+			box.style.top = top + 'px';
+		}
+	</script>
+</html>
